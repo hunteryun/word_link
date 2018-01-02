@@ -1,0 +1,40 @@
+word_link.word_link_list:
+  path: '/admin/word_link/list'
+  defaults:
+    _controller: '\Hunter\word_link\Controller\Word_linkController::word_link_list'
+    _title: 'word_link list'
+  requirements:
+    _permission: 'access admin page'
+  
+word_link.word_link_add:
+  path: '/admin/word_link/add'
+  defaults:
+    _controller: '\Hunter\word_link\Controller\Word_linkController::word_link_add'
+    _title: 'word_link add'
+  requirements:
+    _permission: 'access admin page'
+  
+word_link.word_link_edit:
+  path: '/admin/word_link/edit/{wid}'
+  defaults:
+    _controller: '\Hunter\word_link\Controller\Word_linkController::word_link_edit'
+    _title: 'word_link edit'
+  requirements:
+    _permission: 'access admin page'
+  
+word_link.word_link_update:
+  path: '/admin/word_link/update'
+  defaults:
+    _controller: '\Hunter\word_link\Controller\Word_linkController::word_link_update'
+    _title: 'word_link update'
+  requirements:
+    _permission: 'access admin page'
+  
+word_link.word_link_del:
+  path: '/admin/word_link/del/{wid}'
+  defaults:
+    _controller: '\Hunter\word_link\Controller\Word_linkController::word_link_del'
+    _title: 'word_link del'
+  requirements:
+    _permission: 'access admin page'
+  

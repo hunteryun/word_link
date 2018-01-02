@@ -1,0 +1,5 @@
+name: Word Link
+type: module
+description: Text filter, which convert words into links.
+core: 1.x
+package: Custom

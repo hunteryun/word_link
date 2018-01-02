@@ -1,0 +1,9 @@
+locale: en_US
+faker:
+  word_link:
+    words: faker-firstName
+    url: faker-url
+    status: 1
+    uid: 1
+    created: timenow
+    updated: timenow

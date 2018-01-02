@@ -1,0 +1,70 @@
+<?php
+/**
+ * get word_link by id
+ */
+function get_word_link_byid($wid) {
+    $word_link = db_select('word_link', 'w')
+      ->fields('w')
+      ->condition('w.wid', $wid)
+      ->execute()
+      ->fetchObject();
+
+    return $word_link;
+}
+
+/**
+ * get all word_link.
+ */
+function get_all_word_link($parms) {
+    $data = array();
+    $query = db_select('word_link', 'w')
+      ->fields('w')
+      ->extend('Pager')->size(20)->page($parms['page'])
+      ->orderBy('w.created', 'DESC');
+
+    $data['pager'] = $query->fetchPager();
+    $data['list'] = $query->execute()->fetchAll();
+
+    return $data;
+}
+
+/**
+ * Load all a set of words from database.
+ */
+function simple_word_link_sets_load() {
+  $query = db_select('word_link', 'kw');
+  $query->fields('kw', array('wid', 'words', 'url', 'status'));
+  $result = $query->execute();
+
+  $sets = array();
+
+  // Filling a set of values
+  if (!empty($result)) {
+    while ($item = $result->fetchAssoc()) {
+      $sets[] = array(
+        'wid' => $item['wid'],
+        'words' => explode('|', $item['words']),
+        'url' => $item['url'],
+        'status' => $item['status'],
+      );
+    }
+  }
+
+  return $sets;
+}
+
+/**
+ * word link filter.
+ */
+function word_link_filter($text) {
+  $sets = simple_word_link_sets_load();
+
+  foreach ($sets as $set) {
+    if ($set['status']) {
+      $set['words'] = array_map('trim', $set['words']);
+      $text = preg_replace('/(^|["\'\s.,;!?«»])(' . implode('|', $set['words']) . ')(["\'\s.,;!?]|$)/iu', '$1' . '<a href="'.$set['url'].'">$2</a>' . '$3', $text);
+    }
+  }
+
+  return $text;
+}

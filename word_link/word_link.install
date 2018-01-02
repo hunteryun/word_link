@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * word_link database info.
+ */
+
+function word_link_schema() {
+  $schema['word_link'] = array(
+    'description' => 'Stores word_link data.',
+    'fields' => array(
+      'wid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'ID of word_link.',
+      ),
+      'words' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => 1,
+        'default' => '',
+        'description' => 'word_link words.',
+      ),
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => 1,
+        'default' => '',
+        'description' => 'word_link url.',
+      ),
+      'status' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => 1,
+        'default' => 1,
+        'description' => 'word_link status.',
+      ),
+      'uid' => array(
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "page uid.",
+      ),
+      'created' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The Unix timestamp when the user was created.',
+      ),
+      'updated' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The Unix timestamp when the user was updated.',
+      ),
+    ),
+    'primary key' => array('wid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Insert init word_link.
+ */
+function word_link_install() {
+
+}
